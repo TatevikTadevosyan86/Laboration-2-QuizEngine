@@ -18,3 +18,11 @@ export class Question {
     this.#options = [...options]
     this.#correctAnswerIndex = correctAnswerIndex
   }
+  /**
+   * Returns the question text.
+   *
+   * @returns {string} The question text.
+   */
+  getText() {
+    return this.#text
+  }
