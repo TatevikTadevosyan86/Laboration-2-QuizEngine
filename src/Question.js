@@ -13,6 +13,9 @@ export class Question {
    * @param {number} correctAnswerIndex - The index of the correct option.
    */
   constructor(text, options, correctAnswerIndex) {
+    if (typeof text !== 'string' || text.trim() === '') {
+  throw new TypeError('Question text must be a non-empty string.')
+}
     this.#text = text
     this.#options = [...options]
     this.#correctAnswerIndex = correctAnswerIndex
