@@ -18,9 +18,10 @@ it('rejects empty question text', () => {
     new Question('', ['Stockholm', 'Oslo'], 0)
   }).toThrow()
 
-  it('rejects a question with fewer than two options', () => {
+  
+})
+it('rejects a question with fewer than two options', () => {
   expect(() => {
     new Question('What is the capital of Sweden?', ['Stockholm'], 0)
   }).toThrow('A question must have at least two answer options.')
-})
 })
