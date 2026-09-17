@@ -35,4 +35,14 @@ export class Question {
   getOptions() {
     return [...this.#options]
   }
+
+/**
+   * Checks whether the selected answer is correct.
+   *
+   * @param {number} answerIndex - The selected option's index.
+   * @returns {boolean} Whether the answer is correct.
+   */
+  isCorrect(answerIndex) {
+    return answerIndex === this.#correctAnswerIndex
+  }
 }
