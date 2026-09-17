@@ -12,7 +12,6 @@ export class Question {
    * @param {string[]} options - The available answer options.
    * @param {number} correctAnswerIndex - The index of the correct option.
    */
-
   constructor(text, options, correctAnswerIndex) {
     this.#text = text
     this.#options = [...options]
@@ -36,7 +35,7 @@ export class Question {
     return [...this.#options]
   }
 
-/**
+  /**
    * Checks whether the selected answer is correct.
    *
    * @param {number} answerIndex - The selected option's index.
