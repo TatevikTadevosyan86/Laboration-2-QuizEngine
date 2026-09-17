@@ -13,23 +13,19 @@ describe('Question', () => {
     expect(question.isCorrect(2)).toBe(false)
   })
 
-it('rejects empty question text', () => {
-  expect(() => {
-    new Question('', ['Stockholm', 'Oslo'], 0)
-  }).toThrow()
-
-  
-})
-it('rejects a question with fewer than two options', () => {
-  expect(() => {
-    new Question('What is the capital of Sweden?', ['Stockholm'], 0)
-  }).toThrow('A question must have at least two answer options.')
-
-
-})
-it('rejects an empty options array', () => {
-  expect(() => {
-    new Question('What is the capital of Sweden?', [], 0)
-  }).toThrow('A question must have at least two answer options.')
-})
+  it('rejects empty question text', () => {
+    expect(() => {
+      new Question('', ['Stockholm', 'Oslo'], 0)
+    }).toThrow()
+  })
+  it('rejects a question with fewer than two options', () => {
+    expect(() => {
+      new Question('What is the capital of Sweden?', ['Stockholm'], 0)
+    }).toThrow('A question must have at least two answer options.')
+  })
+  it('rejects an empty options array', () => {
+    expect(() => {
+      new Question('What is the capital of Sweden?', [], 0)
+    }).toThrow('A question must have at least two answer options.')
+  })
 })
