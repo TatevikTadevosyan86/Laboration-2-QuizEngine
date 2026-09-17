@@ -26,3 +26,13 @@ export class Question {
   getText() {
     return this.#text
   }
+
+  /**
+   * Returns a copy of the answer options.
+   *
+   * @returns {string[]} The answer options.
+   */
+  getOptions() {
+    return [...this.#options]
+  }
+}
