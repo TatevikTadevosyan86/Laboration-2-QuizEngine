@@ -21,3 +21,8 @@ describe('Question', () => {
     expect(question.isCorrect(2)).toBe(false)
   })
 })
+it('rejects empty question text', () => {
+  expect(() => {
+    new Question('', ['Stockholm', 'Oslo'], 0)
+  }).toThrow()
+})
