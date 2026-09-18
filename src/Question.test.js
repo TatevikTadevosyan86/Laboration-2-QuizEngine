@@ -33,4 +33,9 @@ describe('Question', () => {
       new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 2)
     }).toThrow()
   })
+  it('rejects an empty answer option', () => {
+  expect(() => {
+    new Question('What is the capital of Sweden?', ['Stockholm', ''], 0)
+  }).toThrow('Each answer option must be a non-empty string.')
+})
 })
