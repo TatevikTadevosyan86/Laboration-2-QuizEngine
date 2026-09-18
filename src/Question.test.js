@@ -49,4 +49,13 @@ describe('Question', () => {
       new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0.5)
     }).toThrow('Correct answer index must refer to an existing option.')
   })
+  it('rejects an answer index outside the options', () => {
+  const question = new Question(
+    'What is the capital of Sweden?',
+    ['Stockholm', 'Oslo'],
+    0
+  )
+
+  expect(() => question.isCorrect(2)).toThrow(RangeError)
+})
 })
