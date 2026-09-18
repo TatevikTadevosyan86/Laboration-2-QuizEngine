@@ -56,6 +56,9 @@ export class Question {
    * @returns {boolean} Whether the answer is correct.
    */
   isCorrect(answerIndex) {
+    if (!Number.isInteger(answerIndex) || answerIndex < 0 || answerIndex >= this.#options.length) {
+      throw new RangeError('Answer index must refer to an existing option.')
+    }
     return answerIndex === this.#correctAnswerIndex
   }
 }
