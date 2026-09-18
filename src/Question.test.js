@@ -7,7 +7,7 @@ describe('Question', () => {
 
     expect(question.isCorrect(0)).toBe(true)
   })
-  it('recognizes the correct answer', () => {
+  it('recognizes the incorrect answer', () => {
     const question = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo', 'Helsinki'], 0)
 
     expect(question.isCorrect(2)).toBe(false)
@@ -28,4 +28,9 @@ describe('Question', () => {
       new Question('What is the capital of Sweden?', [], 0)
     }).toThrow('A question must have at least two answer options.')
   })
+  it('rejects a correct answer index outside the options', () => {
+  expect(() => {
+    new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 2)
+  }).toThrow()
+})
 })
