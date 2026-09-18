@@ -38,4 +38,15 @@ describe('Question', () => {
       new Question('What is the capital of Sweden?', ['Stockholm', ''], 0)
     }).toThrow('Each answer option must be a non-empty string.')
   })
+  it('rejects a negative correct answer index', () => {
+    expect(() => {
+      new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], -1)
+    }).toThrow('Correct answer index must refer to an existing option.')
+  })
+
+  it('rejects a decimal correct answer index', () => {
+    expect(() => {
+      new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0.5)
+    }).toThrow('Correct answer index must refer to an existing option.')
+  })
 })
