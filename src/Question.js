@@ -19,6 +19,9 @@ export class Question {
     if (!Array.isArray(options) || options.length < 2) {
       throw new TypeError('A question must have at least two answer options.')
     }
+    if (!Number.isInteger(correctAnswerIndex) || correctAnswerIndex < 0 || correctAnswerIndex >= options.length) {
+      throw new RangeError('Correct answer index must refer to an existing option.')
+    }
     this.#text = text
     this.#options = [...options]
     this.#correctAnswerIndex = correctAnswerIndex

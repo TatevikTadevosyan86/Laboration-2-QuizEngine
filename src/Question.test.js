@@ -29,8 +29,8 @@ describe('Question', () => {
     }).toThrow('A question must have at least two answer options.')
   })
   it('rejects a correct answer index outside the options', () => {
-  expect(() => {
-    new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 2)
-  }).toThrow()
-})
+    expect(() => {
+      new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 2)
+    }).toThrow()
+  })
 })
