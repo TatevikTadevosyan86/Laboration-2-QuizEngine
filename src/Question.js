@@ -22,6 +22,11 @@ export class Question {
     if (!Number.isInteger(correctAnswerIndex) || correctAnswerIndex < 0 || correctAnswerIndex >= options.length) {
       throw new RangeError('Correct answer index must refer to an existing option.')
     }
+    for (const option of options) {
+      if (typeof option !== 'string' || option.trim() === '') {
+        throw new TypeError('Each answer option must be a non-empty string.')
+      }
+    }
     this.#text = text
     this.#options = [...options]
     this.#correctAnswerIndex = correctAnswerIndex
