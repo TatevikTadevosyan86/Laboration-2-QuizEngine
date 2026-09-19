@@ -32,4 +32,35 @@ export class QuizSession {
   getScore() {
     return this.#score
   }
+  /**
+   * Checks whether all questions have been answered.
+   *
+   * @returns {boolean} Whether the session is complete.
+   */
+  isComplete() {
+    return this.#currentQuestionIndex >= this.#quiz.getQuestionCount()
+  }
+  /**
+   * Submits an answer and advances to the next question.
+   *
+   * @param {number} answerIndex - The selected option's index.
+   * @returns {boolean} Whether the answer was correct.
+   * @throws {Error} If the session is already complete.
+   */
+  submitAnswer(answerIndex) {
+    if (this.isComplete()) {
+      throw new Error('Cannot submit an answer after the quiz is complete.')
+    }
+
+    const question = this.getCurrentQuestion()
+    const correct = question.isCorrect(answerIndex)
+
+    if (correct) {
+      this.#score += 1
+    }
+
+    this.#currentQuestionIndex += 1
+
+    return correct
+  }
 }

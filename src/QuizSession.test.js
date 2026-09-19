@@ -14,4 +14,14 @@ describe('QuizSession', () => {
     expect(session.getCurrentQuestion()).toBe(question)
     expect(session.getScore()).toBe(0)
   })
+  it('scores a correct answer and completes a one-question quiz', () => {
+    const quiz = new Quiz()
+    quiz.addQuestion(new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0))
+    const session = new QuizSession(quiz)
+
+    expect(session.isComplete()).toBe(false)
+    expect(session.submitAnswer(0)).toBe(true)
+    expect(session.getScore()).toBe(1)
+    expect(session.isComplete()).toBe(true)
+  })
 })
