@@ -17,4 +17,12 @@ describe('Quiz', () => {
 
     expect(quiz.getQuestionCount()).toBe(1)
   })
+  it('retrieves an added question', () => {
+    const quiz = new Quiz()
+    const question = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0)
+
+    quiz.addQuestion(question)
+
+    expect(quiz.getQuestion(0)).toBe(question)
+  })
 })

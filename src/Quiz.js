@@ -19,4 +19,18 @@ export class Quiz {
   getQuestionCount() {
     return this.#questions.length
   }
+  /**
+   * Returns the question at the given index.
+   *
+   * @param {number} index - The question's position, starting at zero.
+   * @returns {import('./Question.js').Question} The requested question.
+   * @throws {RangeError} If the index is invalid.
+   */
+  getQuestion(index) {
+    if (!Number.isInteger(index) || index < 0 || index >= this.#questions.length) {
+      throw new RangeError('Question index must refer to an existing question.')
+    }
+
+    return this.#questions[index]
+  }
 }
