@@ -24,4 +24,23 @@ describe('QuizSession', () => {
     expect(session.getScore()).toBe(1)
     expect(session.isComplete()).toBe(true)
   })
+  it('advances through questions and scores only correct answers', () => {
+    const firstQuestion = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0)
+    const secondQuestion = new Question('What is the capital of Norway?', ['Stockholm', 'Oslo'], 1)
+
+    const quiz = new Quiz()
+    quiz.addQuestion(firstQuestion)
+    quiz.addQuestion(secondQuestion)
+
+    const session = new QuizSession(quiz)
+
+    expect(session.submitAnswer(0)).toBe(true)
+    expect(session.getScore()).toBe(1)
+    expect(session.getCurrentQuestion()).toBe(secondQuestion)
+    expect(session.isComplete()).toBe(false)
+
+    expect(session.submitAnswer(0)).toBe(false)
+    expect(session.getScore()).toBe(1)
+    expect(session.isComplete()).toBe(true)
+  })
 })
