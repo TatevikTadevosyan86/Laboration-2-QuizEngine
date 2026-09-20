@@ -42,5 +42,19 @@ describe('QuizSession', () => {
     expect(session.submitAnswer(0)).toBe(false)
     expect(session.getScore()).toBe(1)
     expect(session.isComplete()).toBe(true)
+    expect(session.getResults()).toEqual({
+  score: 1,
+  totalQuestions: 2
   })
+  it('rejects results before the quiz is complete', () => {
+  const quiz = new Quiz()
+  quiz.addQuestion(
+    new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0)
+  )
+  const session = new QuizSession(quiz)
+
+  expect(() => session.getResults()).toThrow(
+    'Complete the quiz before requesting results.'
+  )
+})
 })

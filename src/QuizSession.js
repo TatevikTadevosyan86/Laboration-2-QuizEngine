@@ -63,4 +63,20 @@ export class QuizSession {
 
     return correct
   }
+  /**
+   * Returns the final quiz results.
+   *
+   * @returns {{ score: number, totalQuestions: number }} The results.
+   * @throws {Error} If the session is not complete.
+   */
+  getResults() {
+    if (!this.isComplete()) {
+      throw new Error('Complete the quiz before requesting results.')
+    }
+
+    return {
+      score: this.#score,
+      totalQuestions: this.#quiz.getQuestionCount(),
+    }
+  }
 }
