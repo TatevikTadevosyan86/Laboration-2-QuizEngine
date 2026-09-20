@@ -54,4 +54,18 @@ describe('QuizSession', () => {
 
     expect(() => session.getResults()).toThrow('Complete the quiz before requesting results.')
   })
+  it('records submitted answers in order', () => {
+    const quiz = new Quiz()
+    quiz.addQuestion(new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0))
+    quiz.addQuestion(new Question('What is the capital of Norway?', ['Stockholm', 'Oslo'], 1))
+    const session = new QuizSession(quiz)
+
+    session.submitAnswer(0)
+    session.submitAnswer(0)
+
+    expect(session.getAnswerHistory()).toEqual([
+      { questionIndex: 0, answer: 0, correct: true },
+      { questionIndex: 1, answer: 0, correct: false },
+    ])
+  })
 })

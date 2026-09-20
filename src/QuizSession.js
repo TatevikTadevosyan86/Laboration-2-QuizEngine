@@ -85,4 +85,19 @@ export class QuizSession {
       totalQuestions: this.#quiz.getQuestionCount(),
     }
   }
+  /**
+   * Returns copies of the recorded answers.
+   *
+   * @returns {Array<{questionIndex: number, answer: number, correct: boolean}>}
+   *   The submitted answer history.
+   */
+  getAnswerHistory() {
+    const history = []
+
+    for (const answer of this.#answers) {
+      history.push({ ...answer })
+    }
+
+    return history
+  }
 }
