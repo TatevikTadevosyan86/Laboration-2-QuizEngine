@@ -5,6 +5,7 @@ export class QuizSession {
   #quiz
   #currentQuestionIndex = 0
   #score = 0
+  #answers = []
 
   /**
    * Creates a session for a quiz.
@@ -54,6 +55,11 @@ export class QuizSession {
 
     const question = this.getCurrentQuestion()
     const correct = question.isCorrect(answerIndex)
+    this.#answers.push({
+      questionIndex: this.#currentQuestionIndex,
+      answer: answerIndex,
+      correct,
+    })
 
     if (correct) {
       this.#score += 1
