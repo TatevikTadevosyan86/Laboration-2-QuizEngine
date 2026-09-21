@@ -28,7 +28,7 @@ export class QuizSession {
   }
 
   /**
-   * Returns the number of correct answers.
+   * Returns the total points earned.
    *
    * @returns {number} The current score.
    */
