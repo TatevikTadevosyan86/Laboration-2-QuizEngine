@@ -12,8 +12,9 @@ export class Question {
    * @param {string} text - The question text.
    * @param {string[]} options - The available answer options.
    * @param {number} correctAnswerIndex - The index of the correct option.
+   * @param {string} category - The category of the question.
    */
-  constructor(text, options, correctAnswerIndex) {
+  constructor(text, options, correctAnswerIndex, category = 'General') {
     if (typeof text !== 'string' || text.trim() === '') {
       throw new TypeError('Question text must be a non-empty string.')
     }
