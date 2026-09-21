@@ -65,4 +65,15 @@ describe('Question', () => {
 
     expect(question.getCategory()).toBe('General')
   })
+  it('stores a custom point value', () => {
+    const question = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0, 'Geography', 3)
+
+    expect(question.getPoints()).toBe(3)
+  })
+
+  it('defaults to one point', () => {
+    const question = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0)
+
+    expect(question.getPoints()).toBe(1)
+  })
 })

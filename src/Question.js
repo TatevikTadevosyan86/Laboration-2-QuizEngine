@@ -30,6 +30,9 @@ export class Question {
     if (!Number.isInteger(correctAnswerIndex) || correctAnswerIndex < 0 || correctAnswerIndex >= options.length) {
       throw new RangeError('Correct answer index must refer to an existing option.')
     }
+    if (!Number.isInteger(points) || points < 1) {
+      throw new RangeError('Points must be a positive integer.')
+    }
     for (const option of options) {
       if (typeof option !== 'string' || option.trim() === '') {
         throw new TypeError('Each answer option must be a non-empty string.')
@@ -39,6 +42,7 @@ export class Question {
     this.#options = [...options]
     this.#correctAnswerIndex = correctAnswerIndex
     this.#category = category.trim()
+    this.#points = points
   }
   /**
    * Returns the question text.
@@ -77,5 +81,13 @@ export class Question {
    */
   getCategory() {
     return this.#category
+  }
+  /**
+   * Returns the points available for this question.
+   *
+   * @returns {number} The point value.
+   */
+  getPoints() {
+    return this.#points
   }
 }
