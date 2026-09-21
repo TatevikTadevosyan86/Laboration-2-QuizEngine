@@ -1,4 +1,4 @@
-import{Quiz} from './Quiz.js'
+import { Quiz } from './Quiz.js'
 
 /**
  * Tracks one attempt at a quiz.
@@ -103,25 +103,25 @@ export class QuizSession {
     return history
   }
   /**
- * Creates a quiz containing incorrectly answered questions.
- *
- * @returns {Quiz} A quiz containing the mistakes.
- * @throws {Error} If the session is not complete.
- */
-createRetryQuiz() {
-  if (!this.isComplete()) {
-    throw new Error('Complete the quiz before retrying mistakes.')
-  }
-
-  const retryQuiz = new Quiz()
-
-  for (const answer of this.#answers) {
-    if (!answer.correct) {
-      const question = this.#quiz.getQuestion(answer.questionIndex)
-      retryQuiz.addQuestion(question)
+   * Creates a quiz containing incorrectly answered questions.
+   *
+   * @returns {Quiz} A quiz containing the mistakes.
+   * @throws {Error} If the session is not complete.
+   */
+  createRetryQuiz() {
+    if (!this.isComplete()) {
+      throw new Error('Complete the quiz before retrying mistakes.')
     }
-  }
 
-  return retryQuiz
-}
+    const retryQuiz = new Quiz()
+
+    for (const answer of this.#answers) {
+      if (!answer.correct) {
+        const question = this.#quiz.getQuestion(answer.questionIndex)
+        retryQuiz.addQuestion(question)
+      }
+    }
+
+    return retryQuiz
+  }
 }
