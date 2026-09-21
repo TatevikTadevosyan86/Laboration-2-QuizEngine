@@ -64,7 +64,7 @@ export class QuizSession {
     })
 
     if (correct) {
-      this.#score += 1
+      this.#score += question.getPoints()
     }
 
     this.#currentQuestionIndex += 1
