@@ -16,8 +16,8 @@ export class Question {
    */
   constructor(text, options, correctAnswerIndex, category = 'General') {
     if (typeof category !== 'string' || category.trim() === '') {
-  throw new TypeError('Category must be a non-empty string.')
-}
+      throw new TypeError('Category must be a non-empty string.')
+    }
     if (typeof text !== 'string' || text.trim() === '') {
       throw new TypeError('Question text must be a non-empty string.')
     }
@@ -68,11 +68,11 @@ export class Question {
     return answerIndex === this.#correctAnswerIndex
   }
   /**
- * Returns the question's category.
- *
- * @returns {string} The category.
- */
-getCategory() {
-  return this.#category
-}
+   * Returns the question's category.
+   *
+   * @returns {string} The category.
+   */
+  getCategory() {
+    return this.#category
+  }
 }

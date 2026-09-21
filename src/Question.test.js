@@ -54,4 +54,15 @@ describe('Question', () => {
 
     expect(() => question.isCorrect(2)).toThrow(RangeError)
   })
+  it('stores a question category', () => {
+    const question = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0, 'Geography')
+
+    expect(question.getCategory()).toBe('Geography')
+  })
+
+  it('uses General when no category is provided', () => {
+    const question = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0)
+
+    expect(question.getCategory()).toBe('General')
+  })
 })
