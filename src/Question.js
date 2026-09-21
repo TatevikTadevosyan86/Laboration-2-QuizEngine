@@ -6,6 +6,8 @@ export class Question {
   #options
   #correctAnswerIndex
   #category
+  #points
+  
   /**
    * Creates a quiz question.
    *
