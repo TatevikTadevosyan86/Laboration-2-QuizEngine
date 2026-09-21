@@ -7,7 +7,7 @@ export class Question {
   #correctAnswerIndex
   #category
   #points
-  
+
   /**
    * Creates a quiz question.
    *
@@ -15,8 +15,9 @@ export class Question {
    * @param {string[]} options - The available answer options.
    * @param {number} correctAnswerIndex - The index of the correct option.
    * @param {string} category - The category of the question.
+   * @param {number} points - The number of points the question is worth.
    */
-  constructor(text, options, correctAnswerIndex, category = 'General') {
+  constructor(text, options, correctAnswerIndex, category = 'General', points = 1) {
     if (typeof category !== 'string' || category.trim() === '') {
       throw new TypeError('Category must be a non-empty string.')
     }
