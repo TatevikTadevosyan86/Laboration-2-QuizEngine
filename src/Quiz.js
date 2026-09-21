@@ -33,4 +33,26 @@ export class Quiz {
 
     return this.#questions[index]
   }
+  /**
+   * Creates a quiz containing questions from the given category.
+   *
+   * @param {string} category - The category to select.
+   * @returns {Quiz} A new quiz containing matching questions.
+   */
+  filterByCategory(category) {
+    if (typeof category !== 'string' || category.trim() === '') {
+      throw new TypeError('Category must be a non-empty string.')
+    }
+
+    const filteredQuiz = new Quiz()
+    const selectedCategory = category.trim()
+
+    for (const question of this.#questions) {
+      if (question.getCategory() === selectedCategory) {
+        filteredQuiz.addQuestion(question)
+      }
+    }
+
+    return filteredQuiz
+  }
 }

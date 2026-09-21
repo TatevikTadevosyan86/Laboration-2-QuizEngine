@@ -25,4 +25,23 @@ describe('Quiz', () => {
 
     expect(quiz.getQuestion(0)).toBe(question)
   })
+  it('creates a quiz containing only the selected category', () => {
+    const geographyQuestion = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0, 'Geography')
+    const programmingQuestion = new Question(
+      'Which keyword declares a class in JavaScript?',
+      ['class', 'function'],
+      0,
+      'Programming'
+    )
+
+    const quiz = new Quiz()
+    quiz.addQuestion(geographyQuestion)
+    quiz.addQuestion(programmingQuestion)
+
+    const geographyQuiz = quiz.filterByCategory('Geography')
+
+    expect(geographyQuiz.getQuestionCount()).toBe(1)
+    expect(geographyQuiz.getQuestion(0)).toBe(geographyQuestion)
+    expect(quiz.getQuestionCount()).toBe(2)
+  })
 })
