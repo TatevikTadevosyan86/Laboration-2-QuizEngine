@@ -90,4 +90,17 @@ describe('QuizSession', () => {
     expect(retrySession.submitAnswer(1)).toBe(true)
     expect(retrySession.getScore()).toBe(1)
   })
+  it('awards weighted points only for correct answers', () => {
+    const quiz = new Quiz()
+    quiz.addQuestion(new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0, 'Geography', 3))
+    quiz.addQuestion(new Question('What is the capital of Norway?', ['Stockholm', 'Oslo'], 1, 'Geography', 5))
+
+    const session = new QuizSession(quiz)
+
+    session.submitAnswer(0)
+    expect(session.getScore()).toBe(3)
+
+    session.submitAnswer(0)
+    expect(session.getScore()).toBe(3)
+  })
 })
