@@ -68,4 +68,34 @@ describe('QuizSession', () => {
       { questionIndex: 1, answer: 0, correct: false },
     ])
   })
+  it('creates a retry quiz containing only mistakes', () => {
+  const firstQuestion = new Question(
+    'What is the capital of Sweden?',
+    ['Stockholm', 'Oslo'],
+    0
+  )
+  const secondQuestion = new Question(
+    'What is the capital of Norway?',
+    ['Stockholm', 'Oslo'],
+    1
+  )
+  const quiz = new Quiz()
+  quiz.addQuestion(firstQuestion)
+  quiz.addQuestion(secondQuestion)
+
+  const session = new QuizSession(quiz)
+  session.submitAnswer(0)
+  session.submitAnswer(0)
+
+  const retryQuiz = session.createRetryQuiz()
+
+  expect(retryQuiz.getQuestionCount()).toBe(1)
+  expect(retryQuiz.getQuestion(0)).toBe(secondQuestion)
+
+  const retrySession = new QuizSession(retryQuiz)
+
+  expect(retrySession.getScore()).toBe(0)
+  expect(retrySession.submitAnswer(1)).toBe(true)
+  expect(retrySession.getScore()).toBe(1)
+})
 })
