@@ -5,6 +5,7 @@ export class Question {
   #text
   #options
   #correctAnswerIndex
+  #category
   /**
    * Creates a quiz question.
    *
