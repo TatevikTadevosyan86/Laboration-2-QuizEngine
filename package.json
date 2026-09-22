@@ -9,7 +9,7 @@
     "node": ">=24.12.0"
   },
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node examples/basic-quiz.js",
     "test": "vitest",
     "test:run": "vitest run",
     "test:match": "vitest run -t",
