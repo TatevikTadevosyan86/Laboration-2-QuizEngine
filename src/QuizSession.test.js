@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { Question } from './Question.js'
 import { Quiz } from './Quiz.js'
 import { QuizSession } from './QuizSession.js'
+import { MultipleChoiceQuestion } from './MultipleChoiceQuestion.js'
 
 describe('QuizSession', () => {
   it('starts at the first question with a score of zero', () => {
@@ -47,7 +48,6 @@ describe('QuizSession', () => {
       totalQuestions: 2,
       maxScore: 2,
     })
-    
   })
   it('rejects results before the quiz is complete', () => {
     const quiz = new Quiz()
@@ -105,9 +105,26 @@ describe('QuizSession', () => {
     session.submitAnswer(0)
     expect(session.getScore()).toBe(3)
     expect(session.getResults()).toEqual({
-  score: 3,
-  totalQuestions: 2,
-  maxScore: 8
-})
+      score: 3,
+      totalQuestions: 2,
+      maxScore: 8,
+    })
+  })
+  it('protects submitted selections from outside changes', () => {
+    const quiz = new Quiz()
+    quiz.addQuestion(new MultipleChoiceQuestion('Which numbers are even?', ['2', '3', '4'], [0, 2]))
+    const session = new QuizSession(quiz)
+    const selection = [0, 2]
+
+    expect(session.submitAnswer(selection)).toBe(true)
+
+    selection[0] = 1
+
+    const history = session.getAnswerHistory()
+    expect(history[0].answer).toEqual([0, 2])
+
+    history[0].answer[0] = 1
+
+    expect(session.getAnswerHistory()[0].answer).toEqual([0, 2])
   })
 })

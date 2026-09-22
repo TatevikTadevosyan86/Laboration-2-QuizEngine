@@ -46,7 +46,7 @@ export class QuizSession {
   /**
    * Submits an answer and advances to the next question.
    *
-   * @param {number} answerIndex - The selected option's index.
+   * @param {number | number[]} answerIndex - The selected option index or indexes.
    * @returns {boolean} Whether the answer was correct.
    * @throws {Error} If the session is already complete.
    */
@@ -91,14 +91,16 @@ export class QuizSession {
   /**
    * Returns copies of the recorded answers.
    *
-   * @returns {Array<{questionIndex: number, answer: number, correct: boolean}>}
-   *   The submitted answer history.
+   * @returns {Array<{questionIndex: number, answer: number | number[], correct: boolean}>} The submitted answer history.
    */
   getAnswerHistory() {
     const history = []
 
     for (const answer of this.#answers) {
-      history.push({ ...answer })
+      history.push({
+        ...answer,
+        answer: Array.isArray(answer.answer) ? [...answer.answer] : answer.answer,
+      })
     }
 
     return history
