@@ -167,4 +167,15 @@ describe('QuizSession', () => {
       maxScore: 1,
     })
   })
+  it('rejects another answer after completion without changing results', () => {
+    const quiz = new Quiz()
+    quiz.addQuestion(new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0))
+    const session = new QuizSession(quiz)
+
+    session.submitAnswer(0)
+
+    expect(() => session.submitAnswer(0)).toThrow('Cannot submit an answer after the quiz is complete.')
+    expect(session.getScore()).toBe(1)
+    expect(session.getAnswerHistory()).toHaveLength(1)
+  })
 })
