@@ -3,6 +3,7 @@ import { Question } from './Question.js'
 import { Quiz } from './Quiz.js'
 import { QuizSession } from './QuizSession.js'
 import { MultipleChoiceQuestion } from './MultipleChoiceQuestion.js'
+import { TextQuestion } from './TextQuestion.js'
 
 describe('QuizSession', () => {
   it('starts at the first question with a score of zero', () => {
@@ -126,5 +127,26 @@ describe('QuizSession', () => {
     history[0].answer[0] = 1
 
     expect(session.getAnswerHistory()[0].answer).toEqual([0, 2])
+  })
+  it('supports text answers, weighted scoring, history, and retries', () => {
+    const question = new TextQuestion('What is the capital of Sweden?', ['Stockholm'], 'Geography', 3)
+    const quiz = new Quiz()
+    quiz.addQuestion(question)
+
+    const session = new QuizSession(quiz)
+
+    expect(session.submitAnswer('Oslo')).toBe(false)
+    expect(session.getResults()).toEqual({
+      score: 0,
+      totalQuestions: 1,
+      maxScore: 3,
+    })
+    expect(session.getAnswerHistory()).toEqual([{ questionIndex: 0, answer: 'Oslo', correct: false }])
+
+    const retrySession = new QuizSession(session.createRetryQuiz())
+
+    expect(retrySession.submitAnswer('  STOCKHOLM  ')).toBe(true)
+    expect(retrySession.getScore()).toBe(3)
+    expect(retrySession.isComplete()).toBe(true)
   })
 })

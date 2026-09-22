@@ -1,4 +1,5 @@
 import { Quiz } from './Quiz.js'
+import { TextQuestion } from './TextQuestion.js'
 
 /**
  * Tracks one attempt at a quiz.
@@ -46,7 +47,8 @@ export class QuizSession {
   /**
    * Submits an answer and advances to the next question.
    *
-   * @param {number | number[]} answerIndex - The selected option index or indexes.
+   *  @param {number | number[] | string} answerIndex - The selected option indexes or typed answer.
+   * @param answerIndex
    * @returns {boolean} Whether the answer was correct.
    * @throws {Error} If the session is already complete.
    */
@@ -91,7 +93,8 @@ export class QuizSession {
   /**
    * Returns copies of the recorded answers.
    *
-   * @returns {Array<{questionIndex: number, answer: number | number[], correct: boolean}>} The submitted answer history.
+   *  @returns {Array<{questionIndex: number, answer: number | number[] | string, correct: boolean}>}
+   *   The submitted answer history.
    */
   getAnswerHistory() {
     const history = []
