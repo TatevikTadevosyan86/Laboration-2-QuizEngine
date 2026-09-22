@@ -246,4 +246,30 @@ The retry session starts with zero points and an empty answer history.
 Questions retain their categories and point values.
 
 If every answer was correct, the retry quiz is empty.
-Requesting a retry quiz before the session is complete throws an error.
+Requesting a retry quiz before the session is complete throws an error. 
+## Project structure
+
+```text
+├── src/
+│   ├── index.js                       # Public exports
+│   ├── Question.js                    # Single-answer questions
+│   ├── MultipleChoiceQuestion.js      # Multiple-answer questions
+│   ├── TextQuestion.js                # Typed-answer questions
+│   ├── Quiz.js                        # Question collection and filtering
+│   ├── QuizSession.js                 # Progress, scoring, history, retries
+│   └── *.test.js                      # Automated tests for each class
+├── examples/
+│   └── basic-quiz.js                  # Runnable usage example
+├── test/
+│   └── README.md                      # Testing notes from the template
+├── package.json                       # Package settings and scripts
+├── README.md                          # Usage documentation
+└── LICENSE                            # License terms
+```
+
+Import the public classes through `src/index.js`.
+The example is separate from the reusable module.
+
+## License
+
+This project uses the Unlicense. See [LICENSE](./LICENSE) for details.
