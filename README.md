@@ -103,3 +103,88 @@ Option indexes start at zero, so `0` selects Stockholm.
 The question belongs to the Geography category and awards 3 points
 for a correct answer. Results are available after all questions
 have been answered.
+
+## Question types
+
+Import the question classes from the module's entry file.
+This path assumes your file is inside the `examples` directory.
+
+```javascript
+import {
+  Question,
+  MultipleChoiceQuestion,
+  TextQuestion
+} from '../src/index.js'
+```
+
+### Single correct answer
+
+Provide the options and the index of the correct option.
+Indexes start at zero.
+
+```javascript
+const question = new Question(
+  'What is the capital of Sweden?',
+  ['Stockholm', 'Oslo'],
+  0,
+  'Geography',
+  2
+)
+
+question.isCorrect(0) // true
+question.isCorrect(1) // false
+```
+
+### Multiple correct answers
+
+Provide an array of correct option indexes.
+
+```javascript
+const question = new MultipleChoiceQuestion(
+  'Which numbers are even?',
+  ['2', '3', '4'],
+  [0, 2],
+  'Mathematics',
+  3
+)
+
+question.isCorrect([0, 2]) // true
+question.isCorrect([2, 0]) // true: order does not matter
+question.isCorrect([0]) // false: incomplete selection
+question.isCorrect([0, 1, 2]) // false: includes an incorrect option
+```
+
+All correct options must be selected, with no extra options.
+Duplicate or out-of-range indexes throw an error. There is no partial credit.
+
+### Typed answer
+
+Provide an array of accepted answers.
+
+```javascript
+const question = new TextQuestion(
+  'What is the common abbreviation for JavaScript?',
+  ['JS', 'JavaScript'],
+  'Programming',
+  2
+)
+
+question.isCorrect('js') // true
+question.isCorrect('  JAVASCRIPT  ') // true
+question.isCorrect('Java') // false
+```
+
+Matching ignores capitalization and surrounding spaces.
+Spelling mistakes are not automatically corrected.
+
+### Categories, points, and sessions
+
+For all question types, category defaults to `'General'` and points
+default to `1` when omitted. Points must be a positive integer.
+
+Calling `isCorrect()` only checks an answer. To record the answer,
+award points, and advance through a quiz, call
+`session.submitAnswer(answer)` instead.
+
+Pass a number for a single-answer question, an array of numbers for
+a multiple-answer question, or a string for a typed-answer question.
