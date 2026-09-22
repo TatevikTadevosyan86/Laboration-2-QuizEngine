@@ -1,173 +1,105 @@
-# JavaScript CLI Template
+# Quiz Engine
 
-Welcome to the **1dv610** JavaScript Command-Line Interface (CLI) template. This repository serves as a clean, pre-configured boilerplate for building robust Node.js console applications with modern tools and best practices.
+A reusable JavaScript module for creating practice quizzes.
+
+It supports single-answer, multiple-answer, and typed questions,
+question categories, weighted scoring, answer history, and retrying
+incorrectly answered questions.
+
+The module handles quiz logic. The application using it provides the
+user interface and collects answers.
 
 ## 🚀 Features
 
-- **Modern ECMAScript Modules (ESM):** Full native support for `import`/`export` syntax.
-- **Unit Testing:** Pre-configured with [Vitest](https://vitest.dev) for blazing-fast test execution.
-- **Linting & Code Quality:** Strict code analysis using [ESLint](https://eslint.org) integrated with custom `@lnu/eslint-config` rules.
-- **Code Formatting:** Automatic code style management via [Prettier](https://prettier.io).
+- Single-answer questions: select one correct option.
+- Multiple-answer questions: select all correct options for full points.
+- Typed answers: match accepted answers regardless of capitalization
+  and surrounding spaces.
+- Categories: create a quiz containing questions from one topic.
+- Weighted scoring: assign different point values to questions.
+- Answer history: review submitted answers and whether they were correct.
+- Retry mistakes: create a new quiz from incorrectly answered questions.
+- Final results: retrieve earned points, maximum points, and question count.
 
 ---
 
-## 🛠️ Getting Started
+## Getting started
 
-### Prerequisites
+### Requirements
 
-Ensure you have **Node.js** (version 24.12.0 or later) and **Git** installed on your machine.
+- Node.js 24.12.0 or later.
+- npm.
+- Git.
 
-### Installation & Project Setup
+### Setup
 
-Pick the flow that matches your situation.
+Clone this repository using its GitHub clone URL, then open a terminal
+in the cloned project directory.
 
-#### A. Starting from scratch (no repository yet) — recommended
+Install the development dependencies:
 
-Use GitHub's built-in template flow — no git commands needed to get a clean, single-commit history:
+```bash
+npm install
+```
 
-1. On GitHub, open this template repository and click **Use this template → Create a new repository**.
-2. Clone your new repository and move into it:
-
-   ```bash
-   git clone <your-newly-created-repository-url>
-   cd <your-repository-name>
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-GitHub gives your new repository its own single commit copied from this template — no shared history, nothing to merge or squash.
-
-> **Note:** This requires the template repository to have **Template repository** enabled under its GitHub Settings → General. If the "Use this template" button isn't available, use flow B instead.
-
-#### B. Importing into an existing repository (empty or not)
-
-Use this flow if you already have a repository — e.g. one provisioned by GitHub Classroom — that you can't or don't want to recreate from a template.
-
-1. Clone your existing repository and move into it:
-
-   ```bash
-   git clone <your-existing-repository-url>
-   cd <your-repository-name>
-   ```
-
-2. If the repository has no commits yet, create an empty initial commit:
-
-   ```bash
-   git commit --allow-empty -m "Initial commit"
-   ```
-
-   _Note: This step is required for a genuinely empty repository. A branch with zero commits has nothing for `--squash` to diff against, so `git pull --squash` silently falls back to a plain fast-forward — it imports this template's entire internal commit history unmodified instead of collapsing it into one clean commit. An empty commit gives `--squash` a (empty) tree to compare against, so it behaves as intended. Skip this step if the repository already has commits (e.g. an auto-generated README)._
-
-3. **Pull and squash the boilerplate code** from this template repository into your branch:
-
-   ```bash
-   git pull git@github.com:1dv610/js-cli-template.git main --squash --allow-unrelated-histories
-   ```
-
-   _Note: Using `--squash` ensures that the boilerplate's internal development history is collapsed into a single, clean starting point in your repository. If your repository already had files (e.g. GitHub auto-created a README or `.gitignore`), this will report a conflict on those files — resolve it by taking the template's version: `git checkout --theirs <file> && git add <file>`._
-
-4. **Commit the imported files** to finalize the import of the boilerplate:
-
-   ```bash
-   git commit -m "Initial commit from boilerplate"
-   ```
-
-5. **Install the project dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-6. **Push the clean boilerplate setup** up to your own GitHub repository:
-   ```bash
-   git push origin main
-   ```
-
----
-
-## 💻 Available Scripts
-
-You can manage the application lifecycle, testing, and formatting using the following npm scripts:
-
-### Running the Application
-
-Starts the main console application entry point (`src/app.js`), optionally passing a name as the first argument:
+Run the quiz example:
 
 ```bash
 npm start
-npm start -- "Ada Lovelace"
 ```
 
-The `bin` entry in `package.json` also makes the app runnable as a standalone command once linked (`npm link`) or installed:
+Run the automated tests:
 
 ```bash
-js-cli-template "Ada Lovelace"
+npm run test:run
 ```
 
-_Note: Rename the `js-cli-template` key in `package.json`'s `bin` field (and the `name` field) to match your own project when adapting this template._
+The module has no external runtime dependencies. Its development
+dependencies provide testing, linting, and formatting tools.
 
-### Running Tests
+### Running the example
 
-- **Interactive Watch Mode (Recommended for development):**
-  ```bash
-  npm test
-  ```
-- **Single Execution Run:**
-  ```bash
-  npm run test:run
-  ```
-- **Run Specific Tests (by matching name patterns):**
-  ```bash
-  npm run test:match -- <test-name-pattern>
-  ```
-
-### Code Linting
-
-Analyze the source code in `src/` for errors, syntax issues, and anti-patterns:
+Run the example to see how the module creates a quiz, checks answers,
+and returns results:
 
 ```bash
-npm run lint
+npm start
 ```
 
-Automatically fix fixable linting issues:
+This runs `examples/basic-quiz.js`. The answers are supplied in code;
+the example does not prompt for user input.
 
-```bash
-npm run lint:fix
+## Basic usage
+
+Create a file inside the `examples` directory:
+
+```javascript
+import { Question, Quiz, QuizSession } from '../src/index.js'
+
+const quiz = new Quiz()
+
+quiz.addQuestion(
+  new Question(
+    'What is the capital of Sweden?',
+    ['Stockholm', 'Oslo'],
+    0,
+    'Geography',
+    3
+  )
+)
+
+const session = new QuizSession(quiz)
+
+console.log(session.getCurrentQuestion().getText())
+
+session.submitAnswer(0)
+
+console.log(session.getResults())
+// { score: 3, totalQuestions: 1, maxScore: 3 }
 ```
 
-### Formatting
+Option indexes start at zero, so `0` selects Stockholm.
 
-Check if files comply with Prettier styling rules:
-
-```bash
-npm run format:check
-```
-
-Automatically reformat all source files:
-
-```bash
-npm run format
-```
-
----
-
-## 📁 Project Structure
-
-```text
-├── src/
-│   ├── app.js       # Main application logic & execution entry point
-│   └── app.test.js  # Unit tests for closely coupled application logic
-├── test/            # Integration and system tests (higher-level / E2E test flows)
-├── package.json     # Project configuration, scripts, and dependencies
-└── LICENSE          # Unlicense (Public Domain dedication)
-```
-
----
-
-## ⚖️ License
-
-This project is released into the public domain under the **Unlicense**. You are free to copy, modify, publish, and distribute this boilerplate code in any way you see fit without any restrictions.
+The question belongs to the Geography category and awards 3 points
+for a correct answer. Results are available after all questions
+have been answered.
