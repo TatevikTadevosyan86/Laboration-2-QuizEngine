@@ -195,4 +195,16 @@ describe('QuizSession', () => {
     expect(session.submitAnswer(0)).toBe(true)
     expect(session.isComplete()).toBe(true)
   })
+  it('creates an empty retry quiz when every answer is correct', () => {
+    const quiz = new Quiz()
+    quiz.addQuestion(new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0))
+
+    const session = new QuizSession(quiz)
+    session.submitAnswer(0)
+
+    const retryQuiz = session.createRetryQuiz()
+
+    expect(retryQuiz.getQuestionCount()).toBe(0)
+    expect(retryQuiz.getTotalPoints()).toBe(0)
+  })
 })
