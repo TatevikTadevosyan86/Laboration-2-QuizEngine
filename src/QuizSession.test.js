@@ -178,4 +178,21 @@ describe('QuizSession', () => {
     expect(session.getScore()).toBe(1)
     expect(session.getAnswerHistory()).toHaveLength(1)
   })
+  it('keeps the session unchanged when an answer is invalid', () => {
+    const question = new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0)
+    const quiz = new Quiz()
+    quiz.addQuestion(question)
+
+    const session = new QuizSession(quiz)
+
+    expect(() => session.submitAnswer(5)).toThrow(RangeError)
+
+    expect(session.getCurrentQuestion()).toBe(question)
+    expect(session.getScore()).toBe(0)
+    expect(session.getAnswerHistory()).toEqual([])
+    expect(session.isComplete()).toBe(false)
+
+    expect(session.submitAnswer(0)).toBe(true)
+    expect(session.isComplete()).toBe(true)
+  })
 })
