@@ -15,9 +15,12 @@ export class QuizSession {
    * @param {import('./Quiz.js').Quiz} quiz - The quiz to attempt.
    */
   constructor(quiz) {
-    this.#quiz = quiz
-  }
+    this.#quiz = new Quiz()
 
+    for (let index = 0; index < quiz.getQuestionCount(); index += 1) {
+      this.#quiz.addQuestion(quiz.getQuestion(index))
+    }
+  }
   /**
    * Returns the current question.
    *

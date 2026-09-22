@@ -149,4 +149,22 @@ describe('QuizSession', () => {
     expect(retrySession.getScore()).toBe(3)
     expect(retrySession.isComplete()).toBe(true)
   })
+  it('keeps its original questions when the quiz is extended', () => {
+    const quiz = new Quiz()
+    quiz.addQuestion(new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0))
+
+    const session = new QuizSession(quiz)
+
+    quiz.addQuestion(new Question('What is the capital of Norway?', ['Stockholm', 'Oslo'], 1))
+
+    session.submitAnswer(0)
+
+    expect(quiz.getQuestionCount()).toBe(2)
+    expect(session.isComplete()).toBe(true)
+    expect(session.getResults()).toEqual({
+      score: 1,
+      totalQuestions: 1,
+      maxScore: 1,
+    })
+  })
 })
