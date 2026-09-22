@@ -1,7 +1,4 @@
-import { Question } from '../src/Question.js'
-import { Quiz } from '../src/Quiz.js'
-import { QuizSession } from '../src/QuizSession.js'
-
+import { Question, Quiz, QuizSession } from '../src/index.js'
 const quiz = new Quiz()
 quiz.addQuestion(new Question('What is the capital of Sweden?', ['Stockholm', 'Oslo'], 0))
 quiz.addQuestion(new Question('What is the capital of Norway?', ['Stockholm', 'Oslo'], 1))
