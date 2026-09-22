@@ -1,5 +1,4 @@
 import { Quiz } from './Quiz.js'
-import { TextQuestion } from './TextQuestion.js'
 
 /**
  * Tracks one attempt at a quiz.
@@ -48,7 +47,6 @@ export class QuizSession {
    * Submits an answer and advances to the next question.
    *
    *  @param {number | number[] | string} answerIndex - The selected option indexes or typed answer.
-   * @param answerIndex
    * @returns {boolean} Whether the answer was correct.
    * @throws {Error} If the session is already complete.
    */
