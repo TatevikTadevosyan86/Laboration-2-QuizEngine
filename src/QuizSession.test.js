@@ -47,11 +47,7 @@ describe('QuizSession', () => {
       totalQuestions: 2,
       maxScore: 2,
     })
-    expect(session.getResults()).toEqual({
-      score: 3,
-      totalQuestions: 2,
-      maxScore: 8,
-    })
+    
   })
   it('rejects results before the quiz is complete', () => {
     const quiz = new Quiz()
@@ -108,5 +104,10 @@ describe('QuizSession', () => {
 
     session.submitAnswer(0)
     expect(session.getScore()).toBe(3)
+    expect(session.getResults()).toEqual({
+  score: 3,
+  totalQuestions: 2,
+  maxScore: 8
+})
   })
 })
