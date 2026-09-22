@@ -23,9 +23,6 @@ and failed tests.
 
 ## Test Results
 
-
-## Test Results
-
 The latest recorded run used Vitest 5.0.0:
 35 tests passed across 5 test files, with no failures.
 
