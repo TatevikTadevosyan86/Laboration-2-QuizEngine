@@ -45,6 +45,12 @@ describe('QuizSession', () => {
     expect(session.getResults()).toEqual({
       score: 1,
       totalQuestions: 2,
+      maxScore: 2,
+    })
+    expect(session.getResults()).toEqual({
+      score: 3,
+      totalQuestions: 2,
+      maxScore: 8,
     })
   })
   it('rejects results before the quiz is complete', () => {

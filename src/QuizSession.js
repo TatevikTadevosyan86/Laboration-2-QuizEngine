@@ -85,7 +85,7 @@ export class QuizSession {
     return {
       score: this.#score,
       totalQuestions: this.#quiz.getQuestionCount(),
-      maxScore: this.#quiz.getTotalPoints()
+      maxScore: this.#quiz.getTotalPoints(),
     }
   }
   /**

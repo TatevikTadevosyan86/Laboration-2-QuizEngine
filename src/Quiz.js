@@ -56,17 +56,17 @@ export class Quiz {
     return filteredQuiz
   }
   /**
- * Returns the total points available in the quiz.
- *
- * @returns {number} The maximum possible score.
- */
-getTotalPoints() {
-  let totalPoints = 0
+   * Returns the total points available in the quiz.
+   *
+   * @returns {number} The maximum possible score.
+   */
+  getTotalPoints() {
+    let totalPoints = 0
 
-  for (const question of this.#questions) {
-    totalPoints += question.getPoints()
+    for (const question of this.#questions) {
+      totalPoints += question.getPoints()
+    }
+
+    return totalPoints
   }
-
-  return totalPoints
-}
 }
