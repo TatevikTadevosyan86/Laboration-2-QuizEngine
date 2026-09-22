@@ -59,7 +59,7 @@ export class QuizSession {
     const correct = question.isCorrect(answerIndex)
     this.#answers.push({
       questionIndex: this.#currentQuestionIndex,
-      answer: answerIndex,
+      answer: Array.isArray(answerIndex) ? [...answerIndex] : answerIndex,
       correct,
     })
 
