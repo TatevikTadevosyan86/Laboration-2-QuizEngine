@@ -188,3 +188,62 @@ award points, and advance through a quiz, call
 
 Pass a number for a single-answer question, an array of numbers for
 a multiple-answer question, or a string for a typed-answer question.
+## Categories, history, and retries
+
+### Select a category
+
+Create a new quiz containing only questions from one category:
+
+```javascript
+const geographyQuiz = quiz.filterByCategory('Geography')
+const session = new QuizSession(geographyQuiz)
+```
+
+The original quiz is unchanged. Category matching is case-sensitive.
+If no questions match, the returned quiz is empty.
+
+### Read answer history
+
+After submitting answers, retrieve their history:
+
+```javascript
+const history = session.getAnswerHistory()
+console.log(history)
+```
+
+Each record contains:
+
+```javascript
+{
+  questionIndex: 0,
+  answer: 1,
+  correct: false
+}
+```
+
+`questionIndex` is the question's position in the session.
+`answer` contains the submitted number, array of numbers, or text.
+
+History is available during and after a session. Returned records
+and selection arrays are copies, so editing them does not change
+the session's stored history.
+
+### Retry mistakes
+
+After completing a session, create a quiz containing only the
+incorrectly answered questions:
+
+```javascript
+const retryQuiz = session.createRetryQuiz()
+
+if (retryQuiz.getQuestionCount() > 0) {
+  const retrySession = new QuizSession(retryQuiz)
+  console.log(retrySession.getCurrentQuestion().getText())
+}
+```
+
+The retry session starts with zero points and an empty answer history.
+Questions retain their categories and point values.
+
+If every answer was correct, the retry quiz is empty.
+Requesting a retry quiz before the session is complete throws an error.
