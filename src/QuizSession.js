@@ -74,7 +74,7 @@ export class QuizSession {
   /**
    * Returns the final quiz results.
    *
-   * @returns {{ score: number, totalQuestions: number }} The results.
+   * @returns {{ score: number, totalQuestions: number, maxScore: number  }} The results.
    * @throws {Error} If the session is not complete.
    */
   getResults() {
