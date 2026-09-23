@@ -6,7 +6,7 @@ export class Quiz {
   /**
    * Adds a question to the quiz.
    *
-   * @param {import('./Question.js').Question} question - The question to add.
+   * @param {import('./Question.js').Question | import('./MultipleChoiceQuestion.js').MultipleChoiceQuestion | import('./TextQuestion.js').TextQuestion} question - The question to add.
    */
   addQuestion(question) {
     this.#questions.push(question)
@@ -23,7 +23,7 @@ export class Quiz {
    * Returns the question at the given index.
    *
    * @param {number} index - The question's position, starting at zero.
-   * @returns {import('./Question.js').Question} The requested question.
+   * @returns {import('./Question.js').Question | import('./MultipleChoiceQuestion.js').MultipleChoiceQuestion | import('./TextQuestion.js').TextQuestion} The requested question.
    * @throws {RangeError} If the index is invalid.
    */
   getQuestion(index) {

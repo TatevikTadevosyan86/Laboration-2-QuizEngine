@@ -24,7 +24,7 @@ export class QuizSession {
   /**
    * Returns the current question.
    *
-   * @returns {import('./Question.js').Question} The current question.
+   * @returns {import('./Question.js').Question | import('./MultipleChoiceQuestion.js').MultipleChoiceQuestion | import('./TextQuestion.js').TextQuestion} The current question.
    */
   getCurrentQuestion() {
     return this.#quiz.getQuestion(this.#currentQuestionIndex)
