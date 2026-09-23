@@ -13,3 +13,16 @@ console.log(session.getCurrentQuestion().getOptions())
 console.log('Correct answer:', session.submitAnswer(0))
 
 console.log('Final results:', session.getResults())
+const retryQuiz = session.createRetryQuiz()
+
+console.log('Questions to retry:', retryQuiz.getQuestionCount())
+
+if (retryQuiz.getQuestionCount() > 0) {
+  const retrySession = new QuizSession(retryQuiz)
+
+  console.log('Retry question:', retrySession.getCurrentQuestion().getText())
+  console.log(retrySession.getCurrentQuestion().getOptions())
+
+  console.log('Correct answer:', retrySession.submitAnswer(1))
+  console.log('Retry results:', retrySession.getResults())
+}
