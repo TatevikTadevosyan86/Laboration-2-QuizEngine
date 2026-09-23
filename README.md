@@ -33,8 +33,12 @@ user interface and collects answers.
 
 ### Setup
 
-Clone this repository using its GitHub clone URL, then open a terminal
-in the cloned project directory.
+Clone the repository and enter its directory:
+
+```bash
+git clone https://github.com/TatevikTadevosyan86/Laboration-2-QuizEngine.git
+cd Laboration-2-QuizEngine
+```
 
 Install the development dependencies:
 
@@ -60,7 +64,7 @@ dependencies provide testing, linting, and formatting tools.
 ### Running the example
 
 Run the example to see how the module creates a quiz, checks answers,
-and returns results:
+returns results, and starts a new quiz from the incorrect answers:
 
 ```bash
 npm start
@@ -188,6 +192,13 @@ award points, and advance through a quiz, call
 
 Pass a number for a single-answer question, an array of numbers for
 a multiple-answer question, or a string for a typed-answer question.
+
+A quiz can contain all three question types together. `addQuestion()` accepts
+`Question`, `MultipleChoiceQuestion`, or `TextQuestion`. `getQuestion()` and
+`getCurrentQuestion()` return the stored question object. All three types provide
+`getText()`, `getCategory()`, `getPoints()`, and `isCorrect()`. Only the two
+option-based types provide `getOptions()`; `TextQuestion` has no displayed options.
+
 ## Categories, history, and retries
 
 ### Select a category
@@ -246,7 +257,24 @@ The retry session starts with zero points and an empty answer history.
 Questions retain their categories and point values.
 
 If every answer was correct, the retry quiz is empty.
-Requesting a retry quiz before the session is complete throws an error. 
+Requesting a retry quiz before the session is complete throws an error.
+
+See [the runnable example](./examples/basic-quiz.js) for a complete first attempt
+and retry with hard-coded answers.
+
+## Testing and quality checks
+
+Run these commands from the repository root:
+
+```bash
+npm run test:run
+npm run lint
+npm run format:check
+```
+
+See [TEST_REPORT.md](./TEST_REPORT.md) for test cases, recorded results, and
+known testing limitations.
+
 ## Project structure
 
 ```text
@@ -260,10 +288,9 @@ Requesting a retry quiz before the session is complete throws an error.
 │   └── *.test.js                      # Automated tests for each class
 ├── examples/
 │   └── basic-quiz.js                  # Runnable usage example
-├── test/
-│   └── README.md                      # Testing notes from the template
 ├── package.json                       # Package settings and scripts
 ├── README.md                          # Usage documentation
+├── TEST_REPORT.md                     # Test results and limitations
 └── LICENSE                            # License terms
 ```
 
