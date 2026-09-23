@@ -1,7 +1,7 @@
 {
-  "name": "js-cli-template",
+  "name": "quiz-engine",
   "version": "1.0.0",
-  "description": "1DV610 - JavaScript CLI Template / Boilerplate",
+ "description": "A reusable quiz engine with multiple question types, weighted scoring, and retry quizzes.",
   "type": "module",
   "main": "./src/index.js",
 "exports": "./src/index.js",
@@ -20,7 +20,7 @@
   },
   "contributors": [
     "1dv610 Organization",
-    "YOUR NAME <YOUR EMAIL>"
+    "Tatevik Tadevosyan <tatevik@tadevosyan.net>"
   ],
   "license": "Unlicense",
   "private": false,
