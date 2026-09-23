@@ -46,13 +46,7 @@ export class QuizSession {
   isComplete() {
     return this.#currentQuestionIndex >= this.#quiz.getQuestionCount()
   }
-  /**
-   * Submits an answer and advances to the next question.
-   *
-   *  @param {number | number[] | string} answerIndex - The selected option indexes or typed answer.
-   * @returns {boolean} Whether the answer was correct.
-   * @throws {Error} If the session is already complete.
-   */
+
   /**
    * Submits an answer and advances to the next question.
    *
