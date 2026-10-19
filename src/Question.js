@@ -24,18 +24,14 @@ export class Question {
 
     this.#validatePoints(points)
 
-    if (!Array.isArray(options) || options.length < 2) {
-      throw new TypeError('A question must have at least two answer options.')
-    }
+    this.#validateOptionsArray(options)
+
     if (!Number.isInteger(correctAnswerIndex) || correctAnswerIndex < 0 || correctAnswerIndex >= options.length) {
       throw new RangeError('Correct answer index must refer to an existing option.')
     }
 
-    for (const option of options) {
-      if (typeof option !== 'string' || option.trim() === '') {
-        throw new TypeError('Each answer option must be a non-empty string.')
-      }
-    }
+    this.#validateOptionTexts(options)
+
     this.#text = text
     this.#options = [...options]
     this.#correctAnswerIndex = correctAnswerIndex
@@ -75,6 +71,32 @@ export class Question {
   #validatePoints(points) {
     if (!Number.isInteger(points) || points < 1) {
       throw new RangeError('Points must be a positive integer.')
+    }
+  }
+
+  /**
+   * Validates the answer options array.
+   *
+   * @param {string[]} options - The available answer options.
+   * @throws {TypeError} If fewer than two options are supplied.
+   */
+  #validateOptionsArray(options) {
+    if (!Array.isArray(options) || options.length < 2) {
+      throw new TypeError('A question must have at least two answer options.')
+    }
+  }
+
+  /**
+   * Validates the text of each answer option.
+   *
+   * @param {string[]} options - The available answer options.
+   * @throws {TypeError} If an option is not a non-empty string.
+   */
+  #validateOptionTexts(options) {
+    for (const option of options) {
+      if (typeof option !== 'string' || option.trim() === '') {
+        throw new TypeError('Each answer option must be a non-empty string.')
+      }
     }
   }
 

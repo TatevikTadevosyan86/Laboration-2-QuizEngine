@@ -99,4 +99,9 @@ describe('Question', () => {
       }).toThrow(RangeError)
     }
   })
+  it('rejects an answer option containing only whitespace', () => {
+    expect(() => {
+      new Question('Capital of Sweden?', ['Stockholm', '   '], 0)
+    }).toThrow('Each answer option must be a non-empty string.')
+  })
 })
