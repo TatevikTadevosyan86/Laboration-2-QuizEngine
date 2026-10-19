@@ -104,4 +104,9 @@ describe('Question', () => {
       new Question('Capital of Sweden?', ['Stockholm', '   '], 0)
     }).toThrow('Each answer option must be a non-empty string.')
   })
+  it('checks the correct answer index before points', () => {
+    expect(() => {
+      new Question('Capital of Sweden?', ['Stockholm', 'Oslo'], 5, 'Geography', 0)
+    }).toThrow('Correct answer index must refer to an existing option.')
+  })
 })

@@ -22,14 +22,12 @@ export class Question {
 
     this.#validateText(text)
 
-    this.#validatePoints(points)
-
     this.#validateOptionsArray(options)
 
     if (!Number.isInteger(correctAnswerIndex) || correctAnswerIndex < 0 || correctAnswerIndex >= options.length) {
       throw new RangeError('Correct answer index must refer to an existing option.')
     }
-
+    this.#validatePoints(points)
     this.#validateOptionTexts(options)
 
     this.#text = text
