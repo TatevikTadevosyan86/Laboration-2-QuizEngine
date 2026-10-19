@@ -92,4 +92,11 @@ describe('Question', () => {
 
     expect(question.getCategory()).toBe('Geography')
   })
+  it('rejects invalid point values', () => {
+    for (const points of [0, -1, 1.5, '2', NaN]) {
+      expect(() => {
+        new Question('Capital of Sweden?', ['Stockholm', 'Oslo'], 0, 'Geography', points)
+      }).toThrow(RangeError)
+    }
+  })
 })

@@ -22,15 +22,15 @@ export class Question {
 
     this.#validateText(text)
 
+    this.#validatePoints(points)
+
     if (!Array.isArray(options) || options.length < 2) {
       throw new TypeError('A question must have at least two answer options.')
     }
     if (!Number.isInteger(correctAnswerIndex) || correctAnswerIndex < 0 || correctAnswerIndex >= options.length) {
       throw new RangeError('Correct answer index must refer to an existing option.')
     }
-    if (!Number.isInteger(points) || points < 1) {
-      throw new RangeError('Points must be a positive integer.')
-    }
+
     for (const option of options) {
       if (typeof option !== 'string' || option.trim() === '') {
         throw new TypeError('Each answer option must be a non-empty string.')
@@ -63,6 +63,18 @@ export class Question {
   #validateCategory(category) {
     if (typeof category !== 'string' || category.trim() === '') {
       throw new TypeError('Category must be a non-empty string.')
+    }
+  }
+
+  /**
+   * Validates the question's point value.
+   *
+   * @param {number} points - Points awarded for a correct answer.
+   * @throws {RangeError} If points is not a positive integer.
+   */
+  #validatePoints(points) {
+    if (!Number.isInteger(points) || points < 1) {
+      throw new RangeError('Points must be a positive integer.')
     }
   }
 
