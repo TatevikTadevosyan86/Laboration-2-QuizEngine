@@ -44,16 +44,27 @@ export class Question {
   }
 
   /**
- * Validates the question text.
- *
- * @param {string} text - The question text.
- * @throws {TypeError} If the text is not a non-empty string.
- */
-#validateText(text) {
-  if (typeof text !== 'string' || text.trim() === '') {
-    throw new TypeError('Question text must be a non-empty string.')
+   * Validates the question text.
+   *
+   * @param {string} text - The question text.
+   * @throws {TypeError} If the text is not a non-empty string.
+   */
+  #validateText(text) {
+    if (typeof text !== 'string' || text.trim() === '') {
+      throw new TypeError('Question text must be a non-empty string.')
+    }
   }
-}
+  /**
+   * Validates the question category.
+   *
+   * @param {string} category - The question category.
+   * @throws {TypeError} If the category is not a non-empty string.
+   */
+  #validateCategory(category) {
+    if (typeof category !== 'string' || category.trim() === '') {
+      throw new TypeError('Category must be a non-empty string.')
+    }
+  }
 
   /**
    * Returns the question text.
@@ -100,6 +111,5 @@ export class Question {
    */
   getPoints() {
     return this.#points
-
   }
 }

@@ -77,8 +77,19 @@ describe('Question', () => {
     expect(question.getPoints()).toBe(1)
   })
   it('rejects question text containing only whitespace', () => {
-  expect(() => {
-    new Question('   ', ['Stockholm', 'Oslo'], 0)
-  }).toThrow('Question text must be a non-empty string.')
-})
+    expect(() => {
+      new Question('   ', ['Stockholm', 'Oslo'], 0)
+    }).toThrow('Question text must be a non-empty string.')
+  })
+  it('rejects a category containing only whitespace', () => {
+    expect(() => {
+      new Question('Capital of Sweden?', ['Stockholm', 'Oslo'], 0, '   ')
+    }).toThrow('Category must be a non-empty string.')
+  })
+
+  it('trims surrounding spaces from the category', () => {
+    const question = new Question('Capital of Sweden?', ['Stockholm', 'Oslo'], 0, ' Geography ')
+
+    expect(question.getCategory()).toBe('Geography')
+  })
 })
