@@ -76,4 +76,9 @@ describe('Question', () => {
 
     expect(question.getPoints()).toBe(1)
   })
+  it('rejects question text containing only whitespace', () => {
+  expect(() => {
+    new Question('   ', ['Stockholm', 'Oslo'], 0)
+  }).toThrow('Question text must be a non-empty string.')
+})
 })

@@ -18,12 +18,10 @@ export class Question {
    * @param {number} points - The number of points the question is worth.
    */
   constructor(text, options, correctAnswerIndex, category = 'General', points = 1) {
-    if (typeof category !== 'string' || category.trim() === '') {
-      throw new TypeError('Category must be a non-empty string.')
-    }
-    if (typeof text !== 'string' || text.trim() === '') {
-      throw new TypeError('Question text must be a non-empty string.')
-    }
+    this.#validateCategory(category)
+
+    this.#validateText(text)
+
     if (!Array.isArray(options) || options.length < 2) {
       throw new TypeError('A question must have at least two answer options.')
     }
@@ -44,6 +42,19 @@ export class Question {
     this.#category = category.trim()
     this.#points = points
   }
+
+  /**
+ * Validates the question text.
+ *
+ * @param {string} text - The question text.
+ * @throws {TypeError} If the text is not a non-empty string.
+ */
+#validateText(text) {
+  if (typeof text !== 'string' || text.trim() === '') {
+    throw new TypeError('Question text must be a non-empty string.')
+  }
+}
+
   /**
    * Returns the question text.
    *
@@ -89,5 +100,6 @@ export class Question {
    */
   getPoints() {
     return this.#points
+
   }
 }
