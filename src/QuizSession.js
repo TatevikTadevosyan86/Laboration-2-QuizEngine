@@ -112,10 +112,10 @@ export class QuizSession {
   getAnswerHistory() {
     const history = []
 
-    for (const answer of this.#answers) {
+    for (const record of this.#answers) {
       history.push({
-        ...answer,
-        answer: this.#copyAnswer(answer.answer),
+        ...record,
+        answer: this.#copyAnswer(record.answer),
       })
     }
 
@@ -134,9 +134,9 @@ export class QuizSession {
 
     const retryQuiz = new Quiz()
 
-    for (const answer of this.#answers) {
-      if (!answer.correct) {
-        const question = this.#quiz.getQuestion(answer.questionIndex)
+    for (const record of this.#answers) {
+      if (!record.correct) {
+        const question = this.#quiz.getQuestion(record.questionIndex)
         retryQuiz.addQuestion(question)
       }
     }
