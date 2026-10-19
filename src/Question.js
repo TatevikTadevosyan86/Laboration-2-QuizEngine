@@ -19,9 +19,7 @@ export class Question {
    */
   constructor(text, options, correctAnswerIndex, category = 'General', points = 1) {
     this.#validateCategory(category)
-
     this.#validateText(text)
-
     this.#validateOptionsArray(options)
 
     if (!Number.isInteger(correctAnswerIndex) || correctAnswerIndex < 0 || correctAnswerIndex >= options.length) {

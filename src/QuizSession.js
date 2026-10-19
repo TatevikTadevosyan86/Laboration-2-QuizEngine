@@ -21,6 +21,16 @@ export class QuizSession {
       this.#quiz.addQuestion(quiz.getQuestion(index))
     }
   }
+
+  /**
+   * Copies array answers while preserving primitive answers.
+   *
+   * @param {number | number[] | string} answer - The answer to copy.
+   * @returns {number | number[] | string} An independent answer value.
+   */
+  #copyAnswer(answer) {
+    return Array.isArray(answer) ? [...answer] : answer
+  }
   /**
    * Returns the current question.
    *
@@ -64,7 +74,7 @@ export class QuizSession {
 
     this.#answers.push({
       questionIndex: this.#currentQuestionIndex,
-      answer: Array.isArray(answer) ? [...answer] : answer,
+      answer: this.#copyAnswer(answer),
       correct,
     })
 
@@ -105,7 +115,7 @@ export class QuizSession {
     for (const answer of this.#answers) {
       history.push({
         ...answer,
-        answer: Array.isArray(answer.answer) ? [...answer.answer] : answer.answer,
+        answer: this.#copyAnswer(answer.answer),
       })
     }
 
